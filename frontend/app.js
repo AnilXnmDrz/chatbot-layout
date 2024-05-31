@@ -18,7 +18,6 @@ class Chatbox {
 
     display() {
         this.setupEventListeners();
-        this.setupDocumentClickListener();
     }
 
     setupEventListeners() {
@@ -50,12 +49,13 @@ class Chatbox {
             }
         });
 
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', (event) => {
             if (!chatBox.contains(event.target) && !openButton.contains(event.target)) {
                 chatBox.classList.remove('show');
                 chatboxButton.classList.remove('no-animation');
                 helpText.style.opacity = 1;
                 helpText.style.pointerEvents = 'auto';
+                this.state = false;
             }
         });
 
@@ -68,22 +68,12 @@ class Chatbox {
         });
     }
 
-    setupDocumentClickListener() {
-        document.addEventListener('click', (event) => {
-            const { chatBox, chatboxButton } = this.args;
-            if (!chatBox.contains(event.target) && !chatboxButton.contains(event.target)) {
-                chatBox.classList.remove('chatbox--active');
-                chatboxButton.classList.remove('no-animation');
-                this.state = false;
-            }
-        });
-    }
 
     greetUser() {
         const { messagesContainer } = this.args;
 
         setTimeout(() => {
-            let msg = 'Hi. Welcome to Prince Solution. How can I help you?';
+            let msg = 'Hi. Welcome to xyz. How can I help you?';
             const replyElement = document.createElement('div');
             replyElement.classList.add('chatbot_response', 'message--visitor');
             replyElement.innerHTML = `<div class="message__bubble">${msg}</div>`;
